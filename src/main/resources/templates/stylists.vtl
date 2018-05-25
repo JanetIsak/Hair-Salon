@@ -1,0 +1,16 @@
+<div class="container-fluid" id="page2">
+    <h1>All Stylists</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ol>
+        #foreach ($stylist in $stylists)
+        <li><a href="/stylists/$stylist.getId()">$stylist.getName()</a></li>
+        #end
+    </ol>
+
+    <a href="/stylists/new" class="btn btn-danger btn-lg">Add New Stylist</a>
+</div>

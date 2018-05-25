@@ -1,0 +1,13 @@
+<div class="container-fluid" id="page9">
+    <h1>Clients list</h1> #if ($clients)
+    <ol>
+        #foreach ($client in $clients)
+        <li><a href="/clients/$client.getId()">$client.getName()</a></li>
+        #end
+    </ol>
+    #else
+    <p>Client unavailable!</p>
+    #end
+
+    <a href="/clients/new" class="btn btn-danger btn-lg">Add New Client</a>
+</div>
