@@ -1,48 +1,79 @@
 import java.util.ArrayList;
 import java.util.List;
+import org.sql2o.*;
 
 
 
 public class Client {
 
-  private String mName;
-  private String mGender;
-  private int mCellphone;
-  private static List<Client> instances = new ArrayList<Client>();
-  private int mId;
+  private String name;
+  private String gender;
+  private int cellphone;
+  private int id;
 
-  public Hero(String name, String gender, int cellphone) {
+  public Client(String name, String gender, int cellphone) {
 
-    mName = name;
-    mGender = gender;
-    mCellphone = cellphone;
-    instances.add(this);
-    mId = instances.size();
+    this.name = name;
+    this.gender = gender;
+    this.cellphone = cellphone;
   }
 
   public String getName() {
-    return mName;
+    return name;
   }
 
   public String getGender() {
-    return mGender;
+    return gender;
   }
 
   public int getCellphone() {
-    return mCellphone;
+    return cellphone;
   }
 
-  }
-  public static List<Client> all() {
-    return instances;
-  }
-  public static void clear() {
-    instances.clear();
-  }
   public int getId() {
-    return mId;
+    return id;
   }
-  public static Client find(int id) {
-    return instances.get(id - 1);
+
+  public static List<Client> all() {
+  String sql = "SELECT id, name, gender, cellphone FROM clients";
+  try(Connection con = DB.sql2o.open()) {
+    return con.createQuery(sql).executeAndFetch(Client.class);
   }
+}
+
+public static Client find(int id) {
+  try(Connection con = DB.sql2o.open()) {
+   String sql = "SELECT * FROM clients where id=:id";
+   Client client = con.createQuery(sql)
+     .addParameter("id", id)
+     .executeAndFetchFirst(Client.class);
+   return client;
+ }
+}
+
+  @Override
+  public boolean equals(Object otherClient) {
+    if (!(otherClient instanceof Client)) {
+      return false;
+    } else {
+      Client newClient = (Client) otherClient;
+      return this.getName().equals(newClient.getName()) &&
+             this.getGender().equals(newClient.getGender()) &&
+             this.getCellphone() == newClient.getCellphone() &&
+             this.getId() == newClient.getId();
+    }
+  }
+
+  public void save() {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "INSERT INTO clients (name, gender, cellphone) VALUES (:name, :gender, :cellphone)";
+    this.id = (int) con.createQuery(sql, true)
+      .addParameter("name", this.name)
+      .addParameter("gender", this.gender)
+      .addParameter("cellphone", this.cellphone)
+      .executeUpdate()
+      .getKey();
+  }
+}
+
 }

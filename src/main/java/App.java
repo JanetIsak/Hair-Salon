@@ -109,7 +109,7 @@ public class App {
      post("/clients", (request, response) -> {
         Map<String, Object> model = new HashMap<String, Object>();
 
-        Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("squadId")));
+        Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
 
         String name = request.queryParams("name");
         String gender = request.queryParams("gender");

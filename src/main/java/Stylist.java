@@ -8,7 +8,7 @@ public class Stylist {
   private int mId;
   private List<Client> mClients;
 
-  public Squad(String name) {
+  public Stylist(String name) {
     mName = name;
     instances.add(this);
     mId = instances.size();
