@@ -4,10 +4,20 @@ import static org.junit.Assert.*;
 
 public class StylistTest {
 
+  @Before
+        public void setUp() {
+          DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/hair_salon_test", "isak", "yanu1988");
+        }
+
   @After
-  public void autoClear() {
-    Stylist.clear();
-  }
+    public void autoClear() {
+      try(Connection con = DB.sql2o.open()) {
+        String deleteClientsQuery = "DELETE FROM clients *;";
+        String deleteStylistsQuery = "DELETE FROM stylists *;";
+        con.createQuery(deleteClientsQuery).executeUpdate();
+        con.createQuery(deleteStylistsQuery).executeUpdate();
+      }
+    }
 
     @Test
     public void stylist_instantiatesCorrectly_true() {
@@ -24,9 +34,11 @@ public class StylistTest {
     @Test
     public void all_returnsAllInstancesOfStylist_true() {
       Stylist firstStylist = new Stylist("Aru");
-      Stylist firstStylist = new Stylist("Sami");
-      assertEquals(true, Stylist.all().contains(firstStylist));
-      assertEquals(true, Stylist.all().contains(secondStylist));
+      firstStylist.save();
+      Stylist secondStylist = new Stylist("Sami");
+      secondStylist.save();
+      assertEquals(true, Stylist.all().get(0).contains(firstStylist));
+      assertEquals(true, Stylist.all().get(1).contains(secondStylist));
    }
 
    // @Test
@@ -38,7 +50,8 @@ public class StylistTest {
    @Test
    public void getId_stylistInstantiatesWithId_1() {
      Stylist testStylist = new Stylist("Aru");
-     assertEquals(1, testStylist.getId());
+     testStylist.save();
+     assertTrue(testStylist.getId() > 0);
   }
 
    @Test
@@ -62,6 +75,27 @@ public class StylistTest {
      assertTrue(testStylist.getClients().contains(newHClient));
    }
 
+   @Test
+   public void equals_returnsTrueIfNamesAretheSame() {
+      Stylist firstStylist = new Stylist("Aru");
+      Stylist secondStylist = new Stylist("Aru");
+      assertTrue(firstCategory.equals(secondCategory));
+  }
+
+  @Test
+  public void save_savesIntoDatabase_true() {
+     Stylist newStylist = new Stylist("Aru");
+     newStylist.save();
+     assertTrue(Stylist.all().get(0).equals(newStylist));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Stylist newStylist = new Stylist("Aru");
+    newStylist.save();
+    Stylist savedStylist = Stylist.all().get(0);
+    assertEquals(newStylist.getId(), savedStylist.getId());
+  }
    // @Test
    // public void find_returnsNullWhenNoHeroFound_null() {
    //   assertTrue(Squad.find() == null);

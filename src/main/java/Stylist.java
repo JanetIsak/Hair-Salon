@@ -1,44 +1,61 @@
 import java.util.List;
 import java.util.ArrayList;
+import org.sql2o.*;
 
 
 public class Stylist {
-  private String mName;
-  private static List<Stylist> instances = new ArrayList<Stylist>();
-  private int mId;
-  private List<Client> mClients;
+  private String name;
+  private int id;
+
 
   public Stylist(String name) {
-    mName = name;
-    instances.add(this);
-    mId = instances.size();
-    mClients = new ArrayList<Client>();
+    this.name = name;
   }
 
   public String getName() {
-    return mName;
+    return name;
   }
 
   public static List<Stylist> all() {
-    return instances;
-  }
-
-  public static void clear() {
-    instances.clear();
   }
 
   public int getId() {
-    return mId;
+    return id;
   }
 
   public static Stylist find(int id) {
-    return instances.get(id - 1);
+
   }
 
   public List<Client> getClients() {
-    return mClients;
+
   }
-  public void addClient(Client client) {
-    mClients.add(client);
-  }
+
+  public static List<Stylist> all() {
+        String sql = "SELECT id, name FROM stylists";
+        try(Connection con = DB.sql2o.open()) {
+          return con.createQuery(sql).executeAndFetch(Stylist.class);
+        }
+      }
+
+      @Override
+       public boolean equals(Object otherStylist) {
+         if (!(otherStylist instanceof Stylist)) {
+           return false;
+         } else {
+           Stylist newStylist = (Stylist) otherStylist;
+           return this.getName().equals(newStylist.getName());
+           this.getId() == newStylist.getId();
+         }
+       }
+
+       public void save() {
+       try(Connection con = DB.sql2o.open()) {
+         String sql = "INSERT INTO categories (name) VALUES (:name)";
+         this.id = (int) con.createQuery(sql, true)
+           .addParameter("name", this.name)
+           .executeUpdate()
+           .getKey();
+       }
+     }
 }
