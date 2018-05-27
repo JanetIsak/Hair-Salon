@@ -90,8 +90,8 @@ public class App {
      String gender = request.queryParams("gender");
      int cellphone = Integer.parseInt(request.queryParams("cellphone"));
 
-     Client newClient = new Client(name, gender, cellphone);
-     clients.add(newClient);
+     Client newClient = new Client(name, gender, cellphone, stylist.getId());
+     newClient.save();
      request.session().attribute("clients", clients);
 
      model.put("template", "templates/clientList.vtl");
@@ -102,6 +102,7 @@ public class App {
         Map<String, Object> model = new HashMap<String, Object>();
         String name = request.queryParams("name");
         Stylist newStylist = new Stylist(name);
+        newStylist.save();
         model.put("template", "templates/stylist-List.vtl");
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
@@ -114,9 +115,9 @@ public class App {
         String name = request.queryParams("name");
         String gender = request.queryParams("gender");
         int cellphone = Integer.parseInt(request.queryParams("cellphone"));
-        Client newClient = new Client(name, gender, cellphone);
+        Client newClient = new Client(name, gender, cellphone, stylist.getId());
 
-        stylist.addClient(newClient);
+        newClient.save();
 
         model.put("stylist", stylist);
         model.put("template", "templates/stylist-clients-List.vtl");

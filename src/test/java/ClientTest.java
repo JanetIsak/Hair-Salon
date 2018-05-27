@@ -59,16 +59,26 @@ public class ClientTest {
 
   @Test
   public void save_returnsTrueIfPropertiesAretheSame() {
-    Client myClient = new Client("Janet", "Female", 792533748);
-    myClient.save();
+    Client newClient = new Client("Janet", "Female", 792533748);
+    newClient.save();
     assertTrue(Client.all().get(0).equals(myClient));
   }
 
   @Test
   public void save_assignsIdToObject() {
-    Client myClient = new Client("Janet", "Female", 792533748);
-    myClient.save();
+    Client newClient = new Client("Janet", "Female", 792533748);
+    newClient.save();
     Client savedClient = Client.all().get(0);
-    assertEquals(myClient.getId(), savedClient.getId());
+    assertEquals(newClient.getId(), savedClient.getId());
+  }
+
+  @Test
+  public void save_savesStylistIdIntoDB_true() {
+    Stylist newStylist = new Stylist("Sami");
+    newStylist.save();
+    Client newClient = new Client("Janet", "Female", 792533748, newStylist.getId());
+    newClient.save();
+    Client savedClient = Client.find(newClient.getId());
+    assertEquals(savedClient.getStylistId(), newStylist.getId());
   }
 }

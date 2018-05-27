@@ -10,12 +10,14 @@ public class Client {
   private String gender;
   private int cellphone;
   private int id;
+  private int stylistId;
 
-  public Client(String name, String gender, int cellphone) {
+  public Client(String name, String gender, int cellphone, int stylistId) {
 
     this.name = name;
     this.gender = gender;
     this.cellphone = cellphone;
+    this.stylistId = stylistId;
   }
 
   public String getName() {
@@ -34,8 +36,12 @@ public class Client {
     return id;
   }
 
+  public int getStylistId() {
+       return stylistId;
+     }
+
   public static List<Client> all() {
-  String sql = "SELECT id, name, gender, cellphone FROM clients";
+  String sql = "SELECT id, name, gender, cellphone, stylistId FROM clients";
   try(Connection con = DB.sql2o.open()) {
     return con.createQuery(sql).executeAndFetch(Client.class);
   }
@@ -60,17 +66,19 @@ public static Client find(int id) {
       return this.getName().equals(newClient.getName()) &&
              this.getGender().equals(newClient.getGender()) &&
              this.getCellphone() == newClient.getCellphone() &&
-             this.getId() == newClient.getId();
+             this.getId() == newClient.getId() &&
+             this.getStylistId() == newClient.getStylistId();
     }
   }
 
   public void save() {
   try(Connection con = DB.sql2o.open()) {
-    String sql = "INSERT INTO clients (name, gender, cellphone) VALUES (:name, :gender, :cellphone)";
+    String sql = "INSERT INTO clients (name, gender, cellphone, stylistId) VALUES (:name, :gender, :cellphone, :stylistId)";
     this.id = (int) con.createQuery(sql, true)
       .addParameter("name", this.name)
       .addParameter("gender", this.gender)
       .addParameter("cellphone", this.cellphone)
+      .addParameter("stylistId", this.stylistId)
       .executeUpdate()
       .getKey();
   }
