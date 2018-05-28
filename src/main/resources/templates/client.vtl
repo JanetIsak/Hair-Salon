@@ -6,9 +6,25 @@
         <li>$client.getCellphone()</li>
     </ul>
     <br>
+    <h2>Edit client details:</h2>
+    <form action="/stylists/$client.getStylistId()/clients/$client.getId()" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <input id="gender" name="gender" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="cellphone">Cellphone</label>
+            <input id="cellphone" name="cellphone" type="number" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-danger btn-lg">Update Details!</button>
+    </form>
+
+    <!-- <a href="/clients/new" class="btn btn-danger btn-lg">Add another client</a> -->
     <br>
-    <!-- <a href="/clients/new" class="btn btn-danger btn-lg">Add another client</a>
     <br>
-    <br> -->
-    <a href="/clients" class="btn btn-danger btn-lg">Clients List</a>
+    <a href="/stylists/$stylist.getId()" class="btn btn-danger btn-lg">Return to $stylist.getName()</a>
 </div>

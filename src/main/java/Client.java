@@ -84,4 +84,24 @@ public static Client find(int id) {
   }
 }
 
+public void update(String name, String gender, int cellphone) {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "UPDATE clients SET name = :name, gender = :gender, cellphone = :cellphone WHERE id = :id";
+    con.createQuery(sql)
+      .addParameter("name", name)
+      .addParameter("gender", gender)
+      .addParameter("cellphone", cellphone)
+      .addParameter("id", id)
+      .executeUpdate();
+  }
+ }
+
+ public void delete() {
+  try(Connection con = DB.sql2o.open()) {
+  String sql = "DELETE FROM clients WHERE id = :id;";
+  con.createQuery(sql)
+    .addParameter("id", id)
+    .executeUpdate();
+  }
+}
 }
