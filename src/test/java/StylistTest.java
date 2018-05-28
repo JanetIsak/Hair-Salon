@@ -98,6 +98,15 @@ public class StylistTest {
     Stylist savedStylist = Stylist.all().get(0);
     assertEquals(newStylist.getId(), savedStylist.getId());
   }
+
+  @Test
+public void delete_deletesStylist_true() {
+  Stylist newStylist = new Stylist("Aru");
+  newStylist.save();
+  int newStylistId = newStylist.getId();
+  newStylist.delete();
+  assertEquals(null, Stylist.find(newStylistId));
+}
    // @Test
    // public void find_returnsNullWhenNoHeroFound_null() {
    //   assertTrue(Squad.find() == null);

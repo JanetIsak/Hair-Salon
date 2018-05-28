@@ -1,85 +1,59 @@
 body {
-    background-image: url(../images/ladyhero.jpg);
+    background-image: url(../images/bg.jpg);
     background-size: cover;
-    text-align: center;
+    background-position: center;
+    text-align: left;
+    padding: 0%;
+    margin: 2%;
 }
 
 h1 {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 60px;
     color: black;
-    padding-top: 5%;
-}
-
-.btn-danger {
-    size: 40px;
-}
-
-li {
-    font-size: 30px;
-    font-family: 'Permanent Marker', cursive;
-    color: black;
-}
-
-#page2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-a {
-    color: black;
+    font-size: 45px;
+    font-family: 'Frijole', cursive;
+    padding-bottom: 10%;
 }
 
 form {
-    text-align: left;
-    padding-left: 10%;
+    color: black;
+    font-size: 20px;
+    font-family: 'Handlee', cursive;
     padding-right: 30%;
-    padding-bottom: 5%;
-    color: black;
-    font-size: 30px;
 }
 
-#page4 {
-    font-size: 30px;
+#page2 {
     color: black;
-    font-family: 'Permanent Marker', cursive;
+    font-family: 'Handlee', cursive;
+    font-size: 40px;
+    padding-right: 50%;
+    padding-top: 15%;
 }
 
-#page6 {
-    font-size: 30px;
+#page3 {
     color: black;
-    font-family: 'Permanent Marker', cursive;
-}
-
-#page7 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    font-family: 'Handlee', cursive;
+    font-size: 20px;
 }
 
 h2 {
-    color: black;
-    font-family: 'Permanent Marker', cursive;
+    font-family: 'Frijole', cursive;
+    font-size: 40px;
 }
 
-#page8 {
+a {
+    font-family: 'Handlee', cursive;
+    font-size: 20px;
+    color: black;
+}
+
+h3 {
+    font-family: 'Handlee', cursive;
     font-size: 30px;
     color: black;
-    font-family: 'Permanent Marker', cursive;
-}
-
-#page9 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 li {
-    font-size: 30px;
-    font-family: 'Permanent Marker', cursive;
+    font-family: 'Handlee', cursive;
+    font-size: 20px;
     color: black;
 }
