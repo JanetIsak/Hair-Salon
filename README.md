@@ -21,6 +21,13 @@ _The applications allows users to do the following:_
 
 * _Make sure you have Java, Gradle and Postgres installed._
 * _Clone this repository from my Github named JanetIsak._
+
+_Database set up instructions:_
+
+* _In PSQL:_
+* _CREATE DATABASE hair_salon;_
+* _CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);_
+* _CREATE TABLE clients (id serial PRIMARY KEY, name varchar, gender varchar, int cellphone);_
 * _Go to for more information._
 
 
@@ -38,7 +45,7 @@ _If you run into any issues or have questions, ideas or concerns, contact me at 
 * _Gradle_
 * _Spark_
 * _Velocity_
-* _Postgres_
+* _Postgresql_
 
 ### License
 
