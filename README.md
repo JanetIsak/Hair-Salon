@@ -14,12 +14,12 @@ _The applications allows users to do the following:_
 
 * _Create a new Stylist list_
 * _Assign a new Client to a Stylist_
-* _Update Stylist and Client details with the option of add and delete._
+* _Update Stylist and Client details with an option of update and delete._
 
 
 ## Setup/Installation Requirements
 
-* _Make sure you have Java, Gradle installed._
+* _Make sure you have Java, Gradle and Postgres installed._
 * _Clone this repository from my Github named JanetIsak._
 * _Go to for more information._
 
@@ -38,6 +38,7 @@ _If you run into any issues or have questions, ideas or concerns, contact me at 
 * _Gradle_
 * _Spark_
 * _Velocity_
+* _Postgres_
 
 ### License
 
