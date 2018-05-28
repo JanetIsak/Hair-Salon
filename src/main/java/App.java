@@ -123,7 +123,7 @@ public class App {
         return new ModelAndView(model, layout);
       }, new VelocityTemplateEngine());
 
-      post("/categories/:category_id/tasks/:id/delete", (request, response) -> {
+      post("/stylists/:stylist_id/clients/:id/delete", (request, response) -> {
         Map<String, Object> model = new HashMap<String, Object>();
         Client client = Client.find(Integer.parseInt(request.params("id")));
         Stylist stylist = Stylist.find(client.getStylistId());
