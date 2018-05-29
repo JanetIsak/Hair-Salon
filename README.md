@@ -28,7 +28,7 @@ _Database set up instructions:_
 * _CREATE DATABASE hair_salon;_
 * _CREATE TABLE stylists (id serial PRIMARY KEY, name varchar);_
 * _CREATE TABLE clients (id serial PRIMARY KEY, name varchar, gender varchar, int cellphone);_
-* _Go to for more information._
+* _Go to **https://enigmatic-headland-33957.herokuapp.com/** for more information._
 
 
 ## Known Bugs
