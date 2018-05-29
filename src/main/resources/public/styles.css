@@ -57,3 +57,13 @@ li {
     font-size: 20px;
     color: black;
 }
+
+p {
+    color: black;
+    font-family: 'Handlee', cursive;
+    font-size: 20px;
+}
+
+#page7 {
+    padding-right: 50%;
+}
